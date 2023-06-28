@@ -8,6 +8,14 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>..\..\bin\Debug\MainForm</OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>..\..\bin\Release\MainForm</OutputPath>
+  </PropertyGroup>
+  
   <ItemGroup>
     <ProjectReference Include="..\Bot\Bot.csproj" />
     <ProjectReference Include="..\Shared\Shared.csproj" />
