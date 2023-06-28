@@ -44,10 +44,8 @@ namespace MainForm
         {
             if (comboBox1.SelectedIndex == -1) 
             { 
-               // return; 
+               return; 
             }
-            Console.WriteLine(comboBox1.SelectedText);
-            Console.WriteLine(comboBox1.Items[comboBox1.SelectedIndex]);
             var comboBox = ((string)comboBox1.Items[comboBox1.SelectedIndex]).Split(':');
             new BotForm(comboBox[0], comboBox[1]).ShowDialog();
         }
