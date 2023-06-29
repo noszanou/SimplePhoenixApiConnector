@@ -3,7 +3,6 @@ using System.Text;
 
 namespace Shared
 {
-    // not used but who know i will move to it ? 
     public static class ProcessExternal
     {
         [DllImport("USER32.DLL")]

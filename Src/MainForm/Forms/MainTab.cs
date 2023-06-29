@@ -1,13 +1,16 @@
 using Bot;
+using Newtonsoft.Json;
 using Shared;
+using Shared.PhoenixAPI.Enums;
+using Shared.PhoenixAPI.ClientToBot;
 using System.Diagnostics;
 using System.Text;
 
 namespace MainForm
 {
-    public partial class Form1 : Form
+    public partial class MainTab : Form
     {
-        public Form1()
+        public MainTab()
         {
             InitializeComponent();
         }
@@ -57,7 +60,6 @@ namespace MainForm
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             RefreshClientList();
         }
     }

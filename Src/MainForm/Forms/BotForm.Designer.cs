@@ -1,10 +1,6 @@
-﻿using static System.Net.Mime.MediaTypeNames;
-using System.Windows.Forms;
-using System.Xml.Linq;
-
-namespace MainForm
+﻿namespace Bot
 {
-    partial class Form1
+    partial class BotForm
     {
         /// <summary>
         ///  Required designer variable.
@@ -32,58 +28,47 @@ namespace MainForm
         /// </summary>
         private void InitializeComponent()
         {
-            comboBox1 = new ComboBox();
+            textBox1 = new TextBox();
             button1 = new Button();
-            button2 = new Button();
             SuspendLayout();
             // 
-            // comboBox1
+            // textBox1
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(105, 12);
-            comboBox1.MaxLength = 9999999;
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(182, 23);
-            comboBox1.TabIndex = 0;
+            textBox1.Location = new Point(99, 144);
+            textBox1.Margin = new Padding(3, 4, 3, 4);
+            textBox1.Multiline = true;
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(529, 272);
+            textBox1.TabIndex = 0;
             // 
             // button1
             // 
-            button1.Location = new Point(105, 51);
+            button1.Location = new Point(649, 144);
             button1.Name = "button1";
-            button1.Size = new Size(75, 23);
+            button1.Size = new Size(192, 29);
             button1.TabIndex = 1;
-            button1.Text = "Connect";
+            button1.Text = "Recv fake gold packet";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
-            // button2
+            // BotForm
             // 
-            button2.Location = new Point(212, 51);
-            button2.Name = "button2";
-            button2.Size = new Size(75, 23);
-            button2.TabIndex = 2;
-            button2.Text = "Refresh";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
-            // 
-            // Form1
-            // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(450, 100);
-            Controls.Add(button2);
+            ClientSize = new Size(914, 600);
             Controls.Add(button1);
-            Controls.Add(comboBox1);
-            Name = "Form1";
-            Text = "Form1";
-            Load += Form1_Load;
+            Controls.Add(textBox1);
+            Margin = new Padding(3, 4, 3, 4);
+            Name = "BotForm";
+            Text = "Bot";
+            Load += BotForm_Load;
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
-        private ComboBox comboBox1;
+        private TextBox textBox1;
         private Button button1;
-        private Button button2;
     }
 }
