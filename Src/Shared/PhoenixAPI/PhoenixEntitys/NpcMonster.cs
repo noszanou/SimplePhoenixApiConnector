@@ -1,11 +1,11 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Shared.Entitys
+namespace Shared.PhoenixAPI.PhoenixEntitys
 {
     public class NpcMonster
     {
-        public NpcMonster(string name, int id, byte x, byte y, int vnum, byte hpPercent, byte mpPercent) 
-        { 
+        public NpcMonster(string name, int id, byte x, byte y, int vnum, byte hpPercent, byte mpPercent)
+        {
             Name = name;
             Id = id;
             X = x;

@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Shared.Entitys
+namespace Shared.PhoenixAPI.PhoenixEntitys
 {
     public class Inventory
     {

@@ -5,29 +5,31 @@ using SuperSimpleTcp;
 using System.Text;
 using Shared;
 using Shared.PhoenixAPI.BotToClient;
+using Shared.DatEntity.Manager;
 
 namespace Bot
 {
     public partial class BotForm : Form
     {
-        public BotForm(string name, string port)
+        private readonly IBotConfiguration _botConfiguration;
+        private readonly IItemManager _itemManager;
+        public BotForm(IBotConfiguration botConfiguration, IItemManager itemManager)
         {
+            _botConfiguration = botConfiguration;
+            _itemManager = itemManager;
             InitializeComponent();
-            _name = name;
-            _port = port;
         }
-
-        private readonly string _name;
-        private readonly string _port;
 
         private void BotForm_Load(object sender, EventArgs e)
         {
-            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-
             // Rename title to Bot client name :issou:
-            Text = _name;
+            Text = _botConfiguration.Name;
 
-            Client = new SimpleTcpClient($"127.0.0.1:{_port}");
+            // exemple to use ItemDat
+            var seedOfPower = _itemManager.Items[1012];
+            AppendToTextBox($"name: {seedOfPower.Name} price: {seedOfPower.Price}");
+
+            Client = new SimpleTcpClient($"127.0.0.1:{_botConfiguration.Port}");
             // set events
             Client.Events.Connected += Events_Connected;
             Client.Events.Disconnected += Events_Disconnected;

@@ -1,17 +1,17 @@
 using Bot;
-using Newtonsoft.Json;
 using Shared;
-using Shared.PhoenixAPI.Enums;
-using Shared.PhoenixAPI.ClientToBot;
 using System.Diagnostics;
-using System.Text;
 
 namespace MainForm
 {
     public partial class MainTab : Form
     {
-        public MainTab()
+        private readonly BotForm _botForm;
+        private readonly IBotConfiguration _botConfiguration;
+        public MainTab(BotForm botForm, IBotConfiguration botConfiguration)
         {
+            _botForm = botForm;
+            _botConfiguration = botConfiguration; 
             InitializeComponent();
         }
 
@@ -50,7 +50,9 @@ namespace MainForm
                return; 
             }
             var comboBox = ((string)comboBox1.Items[comboBox1.SelectedIndex]).Split(':');
-            new BotForm(comboBox[0], comboBox[1]).ShowDialog();
+            _botConfiguration.Port = comboBox[1];
+            _botConfiguration.Name = comboBox[0];
+            _botForm.ShowDialog();
         }
 
         private void button2_Click(object sender, EventArgs e)

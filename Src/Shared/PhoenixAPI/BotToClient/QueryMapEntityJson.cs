@@ -1,5 +1,5 @@
-﻿using Shared.Entitys;
-using Shared.PhoenixAPI.Enums;
+﻿using Shared.PhoenixAPI.Enums;
+using Shared.PhoenixAPI.PhoenixEntitys;
 using System.Text.Json.Serialization;
 
 namespace Shared.PhoenixAPI.BotToClient

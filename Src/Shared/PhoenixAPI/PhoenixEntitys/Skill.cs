@@ -1,12 +1,12 @@
 ﻿using Newtonsoft.Json;
 using System.Text.Json.Serialization;
 
-namespace Shared.Entitys
+namespace Shared.PhoenixAPI.PhoenixEntitys
 {
     public class Skill
     {
-        public Skill(string name, int vnum, int id, short? range, short area, short manaCost, bool isReady) 
-        { 
+        public Skill(string name, int vnum, int id, short? range, short area, short manaCost, bool isReady)
+        {
             Name = name;
             Vnum = vnum;
             Id = id;

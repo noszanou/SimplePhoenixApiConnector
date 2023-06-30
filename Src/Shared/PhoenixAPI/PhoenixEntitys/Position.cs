@@ -1,4 +1,4 @@
-﻿namespace Shared.Entitys
+﻿namespace Shared.PhoenixAPI.PhoenixEntitys
 {
     public class Position
     {
@@ -9,6 +9,6 @@
         }
 
         public byte PositionX { get; }
-        public byte PositionY { get;}
+        public byte PositionY { get; }
     }
 }
