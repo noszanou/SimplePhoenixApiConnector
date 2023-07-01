@@ -6,6 +6,7 @@ using System.Text;
 using Shared;
 using Shared.PhoenixAPI.BotToClient;
 using Shared.DatEntity.Manager;
+using Shared.Bazaar;
 
 namespace Bot
 {
@@ -27,8 +28,9 @@ namespace Bot
 
             // exemple to extract ItemDat
             var seedOfPower = _itemManager.Items[1012];
+            var bazaarInfo = seedOfPower.GetBazaarInfoItem();
             AppendToTextBox($"name: {seedOfPower.Name} price: {seedOfPower.Price}");
-
+            AppendToTextBox($"Bazaar category: {bazaarInfo.category} subcategory: {bazaarInfo.subCategory}");
             Client = new SimpleTcpClient($"127.0.0.1:{_botConfiguration.Port}");
             // set events
             Client.Events.Connected += Events_Connected;

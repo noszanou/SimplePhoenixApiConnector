@@ -6,7 +6,7 @@ namespace Shared.Bazaar
 {
     public static class BazaarExtension
     {
-        private static (byte category, byte subCategory) GetBazaarInfoItem(this ItemDat item)
+        public static (byte category, byte subCategory) GetBazaarInfoItem(this ItemDat item)
         {
 
             // Missing item parsed ( probably i will add it or no ? c: )
