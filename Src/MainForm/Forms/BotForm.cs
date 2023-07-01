@@ -26,11 +26,6 @@ namespace Bot
             // Rename title to Bot client name :issou:
             Text = _botConfiguration.Name;
 
-            // exemple to extract ItemDat
-            var seedOfPower = _itemManager.Items[1012];
-            var bazaarInfo = seedOfPower.GetBazaarInfoItem();
-            AppendToTextBox($"name: {seedOfPower.Name} price: {seedOfPower.Price}");
-            AppendToTextBox($"Bazaar category: {bazaarInfo.category} subcategory: {bazaarInfo.subCategory}");
             Client = new SimpleTcpClient($"127.0.0.1:{_botConfiguration.Port}");
             // set events
             Client.Events.Connected += Events_Connected;
@@ -38,6 +33,8 @@ namespace Bot
             Client.Events.DataReceived += Events_DataReceived;
             // let's go!
             Client.Connect();
+
+            Client.SendToTcpClient(new GetPlayerInventoryJson());
         }
 
         private void Events_DataReceived(object? sender, DataReceivedEventArgs e)
@@ -67,24 +64,43 @@ namespace Bot
                         {
                             var json = JsonConvert.DeserializeObject<RecvPacketJson>(splitedMessage);
                             AppendToTextBox($"Packet recv: {json.Packet}");
+
+                            if (json.Packet.StartsWith("e_info"))
+                            {
+                                _botConfiguration.LatestEinfoReceived = json;
+                            }
                         }
                         break;
 
                     case ObjectType.query_player_info:
                         {
                             var json = JsonConvert.DeserializeObject<QueryPlayerInfoJson>(splitedMessage);
+                            _botConfiguration.Player = json.Player;
                         }
                         break;
 
                     case ObjectType.query_inventory:
                         {
                             var json = JsonConvert.DeserializeObject<QueryPlayerInventoryJson>(splitedMessage);
+                            _botConfiguration.Inventory = json.Inventory;
+
+                            // Pet bead
+                            var bead = _botConfiguration.Inventory.Equip.FirstOrDefault(s => s.Vnum == 192);
+                            if (bead == null)
+                            {
+                                continue;
+                            }
+                            var item = _itemManager.Items[bead.Vnum];
+                            var bazaarInfo = bead.GetBazaarInfoItem(Client, _botConfiguration, _itemManager);
+                            AppendToTextBox($"name: {item.Name} price: {item.Price}");
+                            AppendToTextBox($"Bazaar category: {bazaarInfo.category} subcategory: {bazaarInfo.subCategory}");
                         }
                         break;
 
                     case ObjectType.query_skills_info:
                         {
                             var json = JsonConvert.DeserializeObject<QueryPlayerSkillJson>(splitedMessage);
+                            _botConfiguration.Skills.AddRange(json.Skills);
                         }
                         break;
 

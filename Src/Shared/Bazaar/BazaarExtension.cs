@@ -1,18 +1,23 @@
 ﻿using Shared.Bazaar.Enums;
 using Shared.DatEntity;
 using Shared.DatEntity.Enums.Items;
+using Shared.PhoenixAPI.ClientToBot;
+using SuperSimpleTcp;
+using Shared;
+using Shared.PhoenixAPI.PhoenixEntitys;
+using Shared.DatEntity.Manager;
 
 namespace Shared.Bazaar
 {
     public static class BazaarExtension
     {
-        public static (byte category, byte subCategory) GetBazaarInfoItem(this ItemDat item)
+        public static (byte category, byte subCategory) GetBazaarInfoItem(this Item itemjs, SimpleTcpClient xd, IBotConfiguration _conf, IItemManager manager)
         {
-
+            var item = manager.Items[itemjs.Vnum];
             // Missing item parsed ( probably i will add it or no ? c: )
             // ( Parsed with e_info )
             // Specialist
-            // Pet
+            // Pet ?
             // Npc
             // Vehicle
 
@@ -55,6 +60,34 @@ namespace Shared.Bazaar
                         };
 
                     case ItemType.Box:
+
+                        // ISSSSOUUUUU
+                        if (item.ItemSubType == 0) // Pet
+                        {
+                            if (item.Effect == 0) // Pet bead
+                            {
+                                if (_conf.LatestEinfoReceived == null)
+                                {
+                                    xd.SendToTcpClient(new SendPacketJson($"eqinfo 1 {itemjs.Position}"));
+                                }
+                                
+                                while(!_conf.LatestEinfoReceived.Packet.Contains(item.Id.ToString()))
+                                {
+                                    xd.SendToTcpClient(new SendPacketJson($"eqinfo 1 {itemjs.Position}"));
+                                }
+                                var hodlingVnum = _conf.LatestEinfoReceived.Packet.Split(' ')[3];
+                                if (hodlingVnum == "0")
+                                {
+                                    return ((byte)BazaarListType.Pet, (byte)PetSub.BeadEmpty);
+                                }
+                                return ((byte)BazaarListType.Pet, (byte)PetSub.BeadWithPet);
+                            }
+                            else
+                            {
+                                return ((byte)BazaarListType.Pet, (byte)PetSub.BeadWithPet);
+                            }
+                        }
+
                         if (item.Type == InventoryType.Equipment && item.ItemType == ItemType.Box && !item.ShowWarningOnUse)
                         {
                             return ((byte)BazaarListType.Other, (byte)OtherSub.All);
