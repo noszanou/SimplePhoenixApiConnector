@@ -110,7 +110,11 @@ namespace Bot
 
         public void AppendToTextBox(string text)
         {
-            textBox1.AppendText(DateTime.Now.ToString(@"hh\:mm\:ss") + " | " + text + Environment.NewLine);
+            Invoke(new MethodInvoker(delegate ()
+            {
+                textBox1.Text += $"{DateTime.Now.ToString(@"hh\:mm\:ss")} | {text} {Environment.NewLine}";
+            }));
+            //textBox1.AppendText(DateTime.Now.ToString(@"hh\:mm\:ss") + " | " + text + Environment.NewLine);
         }
 
         private void button1_Click(object sender, EventArgs e)
