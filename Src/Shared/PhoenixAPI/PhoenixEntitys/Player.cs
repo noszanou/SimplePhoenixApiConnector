@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace Shared.PhoenixAPI.PhoenixEntitys
 {
@@ -20,28 +20,28 @@ namespace Shared.PhoenixAPI.PhoenixEntitys
             Family = family;
         }
 
-        [JsonPropertyName("name")]
+        [JsonProperty("name")]
         public string Name { get; set; }
 
-        [JsonPropertyName("id")]
+        [JsonProperty("id")]
         public int Id { get; set; }
 
-        [JsonPropertyName("x")]
+        [JsonProperty("x")]
         public byte PositionX { get; set; }
 
-        [JsonPropertyName("y")]
+        [JsonProperty("y")]
         public byte PositionY { get; set; }
 
-        [JsonPropertyName("level")]
+        [JsonProperty("level")]
         public byte Level { get; set; }
 
-        [JsonPropertyName("champion_level")]
+        [JsonProperty("champion_level")]
         public byte HeroLevel { get; set; }
 
-        [JsonPropertyName("hp_percent")]
+        [JsonProperty("hp_percent")]
         public byte HpPercent { get; set; }
 
-        [JsonPropertyName("mp_percent")]
+        [JsonProperty("mp_percent")]
         public byte MpPercent { get; set; }
 
         [JsonProperty("map_id", NullValueHandling = NullValueHandling.Ignore)]

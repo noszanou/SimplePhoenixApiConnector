@@ -1,6 +1,6 @@
 ﻿using Shared.PhoenixAPI.Enums;
 using Shared.PhoenixAPI.PhoenixEntitys;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace Shared.PhoenixAPI.BotToClient
 {
@@ -12,10 +12,10 @@ namespace Shared.PhoenixAPI.BotToClient
             Inventory = inventory;
         }
 
-        [JsonPropertyName("type")]
+        [JsonProperty("type")]
         public byte Type { get; }
 
-        [JsonPropertyName("player_info")]
+        [JsonProperty("player_info")]
         public Inventory Inventory { get; } = new();
     }
 }

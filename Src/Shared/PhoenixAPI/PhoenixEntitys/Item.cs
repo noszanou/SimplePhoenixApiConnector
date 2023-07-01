@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace Shared.PhoenixAPI.PhoenixEntitys
 {
@@ -17,16 +17,16 @@ namespace Shared.PhoenixAPI.PhoenixEntitys
             Id = id;
         }
 
-        [JsonPropertyName("quantity")]
+        [JsonProperty("quantity")]
         public short Quantity { get; set; }
 
-        [JsonPropertyName("name")]
+        [JsonProperty("name")]
         public string Name { get; set; }
 
         [JsonProperty("position", NullValueHandling = NullValueHandling.Ignore)]
         public byte? Position { get; set; }
 
-        [JsonPropertyName("vnum")]
+        [JsonProperty("vnum")]
         public short Vnum { get; set; }
 
         [JsonProperty("x", NullValueHandling = NullValueHandling.Ignore)]

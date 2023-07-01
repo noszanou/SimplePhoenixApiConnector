@@ -1,16 +1,16 @@
-﻿using System.Text.Json.Serialization;
+﻿using Newtonsoft.Json;
 
 namespace Shared.PhoenixAPI.PhoenixEntitys
 {
     public class Inventory
     {
-        [JsonPropertyName("equip")]
+        [JsonProperty("equip")]
         public List<Item> Equip { get; set; } = new();
 
-        [JsonPropertyName("main")]
+        [JsonProperty("main")]
         public List<Item> Main { get; set; } = new();
 
-        [JsonPropertyName("etc")]
+        [JsonProperty("etc")]
         public List<Item> Etc { get; set; } = new();
     }
 }

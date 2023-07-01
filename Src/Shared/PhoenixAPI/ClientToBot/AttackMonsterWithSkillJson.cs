@@ -1,5 +1,5 @@
 ﻿using Shared.PhoenixAPI.Enums;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace Shared.PhoenixAPI.ClientToBot
 {
@@ -12,13 +12,13 @@ namespace Shared.PhoenixAPI.ClientToBot
             SkillId = skillId;
         }
 
-        [JsonPropertyName("type")]
+        [JsonProperty("type")]
         public byte Type { get; }
 
-        [JsonPropertyName("monster_id")]
+        [JsonProperty("monster_id")]
         public int MonsterId { get; }
 
-        [JsonPropertyName("skill_id")]
+        [JsonProperty("skill_id")]
         public int SkillId { get; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using Shared.PhoenixAPI.Enums;
 using Shared.PhoenixAPI.PhoenixEntitys;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace Shared.PhoenixAPI.ClientToBot
 {
@@ -13,13 +13,13 @@ namespace Shared.PhoenixAPI.ClientToBot
             PositionY = position.PositionY;
         }
 
-        [JsonPropertyName("type")]
+        [JsonProperty("type")]
         public byte Type { get; }
 
-        [JsonPropertyName("x")]
+        [JsonProperty("x")]
         public byte PositionX { get; }
 
-        [JsonPropertyName("y")]
+        [JsonProperty("y")]
         public byte PositionY { get; }
     }
 }

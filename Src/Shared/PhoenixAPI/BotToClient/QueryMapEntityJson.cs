@@ -1,6 +1,6 @@
 ﻿using Shared.PhoenixAPI.Enums;
 using Shared.PhoenixAPI.PhoenixEntitys;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace Shared.PhoenixAPI.BotToClient
 {
@@ -11,19 +11,19 @@ namespace Shared.PhoenixAPI.BotToClient
             Type = (byte)ObjectType.query_map_entities;
         }
 
-        [JsonPropertyName("type")]
+        [JsonProperty("type")]
         public byte Type { get; }
 
-        [JsonPropertyName("players")]
+        [JsonProperty("players")]
         public List<Player> Players { get; } = new();
 
-        [JsonPropertyName("npcs")]
+        [JsonProperty("npcs")]
         public List<NpcMonster> Npcs { get; } = new();
 
-        [JsonPropertyName("monsters")]
+        [JsonProperty("monsters")]
         public List<NpcMonster> Monsters { get; } = new();
 
-        [JsonPropertyName("items")]
+        [JsonProperty("items")]
         public List<Item> Items { get; } = new();
     }
 }

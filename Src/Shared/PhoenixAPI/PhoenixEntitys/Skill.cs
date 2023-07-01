@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace Shared.PhoenixAPI.PhoenixEntitys
 {
@@ -16,25 +16,25 @@ namespace Shared.PhoenixAPI.PhoenixEntitys
             Range = range;
         }
 
-        [JsonPropertyName("name")]
+        [JsonProperty("name")]
         public string Name { get; set; }
 
-        [JsonPropertyName("vnum")]
+        [JsonProperty("vnum")]
         public int Vnum { get; set; }
 
-        [JsonPropertyName("id")]
+        [JsonProperty("id")]
         public int Id { get; set; }
 
         [JsonProperty("range", NullValueHandling = NullValueHandling.Ignore)]
         public short? Range { get; set; }
 
-        [JsonPropertyName("area")]
+        [JsonProperty("area")]
         public short Area { get; set; }
 
-        [JsonPropertyName("mana_cost")]
+        [JsonProperty("mana_cost")]
         public short ManaCost { get; set; }
 
-        [JsonPropertyName("is_ready")]
+        [JsonProperty("is_ready")]
         public bool IsReady { get; set; }
     }
 }

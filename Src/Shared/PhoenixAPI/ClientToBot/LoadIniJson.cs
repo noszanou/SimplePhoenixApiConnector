@@ -1,5 +1,5 @@
 ﻿using Shared.PhoenixAPI.Enums;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace Shared.PhoenixAPI.ClientToBot
 {
@@ -11,10 +11,10 @@ namespace Shared.PhoenixAPI.ClientToBot
             Path = path;
         }
 
-        [JsonPropertyName("type")]
+        [JsonProperty("type")]
         public byte Type { get; }
 
-        [JsonPropertyName("path")]
+        [JsonProperty("path")]
         public string Path { get; }
     }
 }

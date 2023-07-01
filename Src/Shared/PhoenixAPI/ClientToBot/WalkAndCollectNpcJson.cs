@@ -1,5 +1,5 @@
 ﻿using Shared.PhoenixAPI.Enums;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace Shared.PhoenixAPI.ClientToBot
 {
@@ -11,10 +11,10 @@ namespace Shared.PhoenixAPI.ClientToBot
             NpcId = npcId;
         }
 
-        [JsonPropertyName("type")]
+        [JsonProperty("type")]
         public byte Type { get; }
 
-        [JsonPropertyName("npc_id")]
+        [JsonProperty("npc_id")]
         public int NpcId { get; }
     }
 }

@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+﻿using Newtonsoft.Json;
 
 namespace Shared.PhoenixAPI.PhoenixEntitys
 {
@@ -15,25 +15,25 @@ namespace Shared.PhoenixAPI.PhoenixEntitys
             Vnum = vnum;
         }
 
-        [JsonPropertyName("name")]
+        [JsonProperty("name")]
         public string Name { get; set; }
 
-        [JsonPropertyName("id")]
+        [JsonProperty("id")]
         public int Id { get; set; }
 
-        [JsonPropertyName("x")]
+        [JsonProperty("x")]
         public byte X { get; set; }
 
-        [JsonPropertyName("y")]
+        [JsonProperty("y")]
         public byte Y { get; set; }
 
-        [JsonPropertyName("vnum")]
+        [JsonProperty("vnum")]
         public int Vnum { get; set; }
 
-        [JsonPropertyName("hp_percent")]
+        [JsonProperty("hp_percent")]
         public byte HpPercent { get; set; }
 
-        [JsonPropertyName("mp_percent")]
+        [JsonProperty("mp_percent")]
         public byte MpPercent { get; set; }
     }
 }

@@ -1,5 +1,5 @@
-﻿using Shared.PhoenixAPI.Enums;
-using System.Text.Json.Serialization;
+﻿using Newtonsoft.Json;
+using Shared.PhoenixAPI.Enums;
 
 namespace Shared.PhoenixAPI.ClientToBot
 {
@@ -10,7 +10,7 @@ namespace Shared.PhoenixAPI.ClientToBot
             Type = (byte)ObjectType.start_bot;
         }
 
-        [JsonPropertyName("type")]
+        [JsonProperty("type")]
         public byte Type { get; }
     }
 }

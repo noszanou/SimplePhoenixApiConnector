@@ -1,5 +1,5 @@
-﻿using Shared.PhoenixAPI.Enums;
-using System.Text.Json.Serialization;
+﻿using Newtonsoft.Json;
+using Shared.PhoenixAPI.Enums;
 
 namespace Shared.PhoenixAPI.ClientToBot
 {
@@ -11,10 +11,10 @@ namespace Shared.PhoenixAPI.ClientToBot
             Packet = packet;
         }
 
-        [JsonPropertyName("type")]
+        [JsonProperty("type")]
         public byte Type { get; }
 
-        [JsonPropertyName("packet")]
+        [JsonProperty("packet")]
         public string Packet { get; }
     }
 }
