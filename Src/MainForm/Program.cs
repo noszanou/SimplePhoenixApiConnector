@@ -3,7 +3,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Shared;
 using Shared.DatEntity.Manager;
-using Shared.DatEntity.Parsing;
 using System.Text;
 
 namespace MainForm

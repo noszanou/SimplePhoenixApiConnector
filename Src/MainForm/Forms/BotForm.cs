@@ -25,7 +25,7 @@ namespace Bot
             // Rename title to Bot client name :issou:
             Text = _botConfiguration.Name;
 
-            // exemple to use ItemDat
+            // exemple to extract ItemDat
             var seedOfPower = _itemManager.Items[1012];
             AppendToTextBox($"name: {seedOfPower.Name} price: {seedOfPower.Price}");
 
@@ -43,55 +43,59 @@ namespace Bot
             // Do interaction with Api             
             var stringObject = Encoding.UTF8.GetString(e.Data.Array, 0, e.Data.Count);
 
-            var jsonAsDynamic = JsonConvert.DeserializeObject<dynamic>(stringObject);
-
-            if (jsonAsDynamic?.type == null)
+            foreach (var splitedMessage in stringObject.Split("\u0001")) 
             {
-                return;
+                var jsonAsDynamic = JsonConvert.DeserializeObject<dynamic>(splitedMessage);
+
+                if (jsonAsDynamic?.type == null)
+                {
+                    return;
+                }
+
+                switch ((ObjectType)jsonAsDynamic.type)
+                {
+                    case ObjectType.packet_send:
+                        {
+                            var json = JsonConvert.DeserializeObject<SendPacketJson>(splitedMessage);
+                            AppendToTextBox($"Packet send: {json.Packet}");
+                        }
+                        break;
+
+                    case ObjectType.packet_recv:
+                        {
+                            var json = JsonConvert.DeserializeObject<RecvPacketJson>(splitedMessage);
+                            AppendToTextBox($"Packet recv: {json.Packet}");
+                        }
+                        break;
+
+                    case ObjectType.query_player_info:
+                        {
+                            var json = JsonConvert.DeserializeObject<QueryPlayerInfoJson>(splitedMessage);
+                        }
+                        break;
+
+                    case ObjectType.query_inventory:
+                        {
+                            var json = JsonConvert.DeserializeObject<QueryPlayerInventoryJson>(splitedMessage);
+                        }
+                        break;
+
+                    case ObjectType.query_skills_info:
+                        {
+                            var json = JsonConvert.DeserializeObject<QueryPlayerSkillJson>(splitedMessage);
+                        }
+                        break;
+
+                    case ObjectType.query_map_entities:
+                        {
+                            var json = JsonConvert.DeserializeObject<QueryMapEntityJson>(splitedMessage);
+                        }
+                        break;
+
+                }
+                // Json parse nieunieu
             }
 
-            switch ((ObjectType)jsonAsDynamic.type)
-            {
-                case ObjectType.packet_send:
-                    {
-                        var json = JsonConvert.DeserializeObject<SendPacketJson>(stringObject);
-                        AppendToTextBox($"Packet send: {json.Packet}");
-                    }
-                    break;
-
-                case ObjectType.packet_recv:
-                    {
-                        var json = JsonConvert.DeserializeObject<RecvPacketJson>(stringObject);
-                        AppendToTextBox($"Packet recv: {json.Packet}");
-                    }
-                    break;
-
-                case ObjectType.query_player_info:
-                    {
-                        var json = JsonConvert.DeserializeObject<QueryPlayerInfoJson>(stringObject);
-                    }
-                    break;
-
-                case ObjectType.query_inventory:
-                    {
-                        var json = JsonConvert.DeserializeObject<QueryPlayerInventoryJson>(stringObject);
-                    }
-                    break;
-
-                case ObjectType.query_skills_info:
-                    {
-                        var json = JsonConvert.DeserializeObject<QueryPlayerSkillJson>(stringObject);
-                    }
-                    break;
-
-                case ObjectType.query_map_entities:
-                    {
-                        var json = JsonConvert.DeserializeObject<QueryMapEntityJson>(stringObject);
-                    }
-                    break;
-
-            }
-            // Json parse nieunieu
         }
 
         private void Events_Disconnected(object? sender, ConnectionEventArgs e)
