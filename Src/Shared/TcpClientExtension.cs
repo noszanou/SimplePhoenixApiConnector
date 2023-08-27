@@ -8,7 +8,8 @@ namespace Shared
     {
         public static void SendToTcpClient(this SimpleTcpClient client, object e)
         {
-            client.Send(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(e, Formatting.Indented) + 0x01));
+            var jsonParsed = JsonConvert.SerializeObject(e, Formatting.Indented);
+            client.Send(Encoding.UTF8.GetBytes(jsonParsed + "\u0001"));
         }
     }
 }
