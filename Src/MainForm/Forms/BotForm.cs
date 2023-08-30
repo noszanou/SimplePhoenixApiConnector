@@ -35,6 +35,9 @@ namespace Bot
             Client.Connect();
 
             Client.SendToTcpClient(new GetPlayerInventoryJson());
+            Client.SendToTcpClient(new GetPlayerInformationJson());
+            Client.SendToTcpClient(new GetPlayerSkillJson());
+            _botConfiguration.LatestEinfoReceived = null;
         }
 
         private void Events_DataReceived(object? sender, DataReceivedEventArgs e)
