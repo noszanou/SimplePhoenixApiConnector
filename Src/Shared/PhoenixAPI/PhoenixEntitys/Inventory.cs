@@ -14,6 +14,6 @@ namespace Shared.PhoenixAPI.PhoenixEntitys
         public List<Item> Etc { get; set; } = new();
 
         [JsonProperty("gold")]
-        public short Gold { get; set; }
+        public int Gold { get; set; }
     }
 }

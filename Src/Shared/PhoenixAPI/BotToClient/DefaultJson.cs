@@ -5,6 +5,6 @@ namespace Shared.PhoenixAPI.BotToClient
     public class DefaultJson
     {
         [JsonProperty("type")]
-        public byte Type { get; }
+        public byte Type { get; set; }
     }
 }

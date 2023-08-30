@@ -42,7 +42,7 @@ namespace Bot
 
         private void Events_DataReceived(object? sender, DataReceivedEventArgs e)
         {
-            // Do interaction with Api             
+            // Do interaction with Api
             var stringObject = Encoding.UTF8.GetString(e.Data.Array, 0, e.Data.Count);
 
             foreach (var splitedMessage in stringObject.Split("\u0001")) 
@@ -60,67 +60,118 @@ namespace Bot
                 {
                     case ObjectType.packet_send:
                         {
-                            var json = JsonConvert.DeserializeObject<SendPacketJson>(splitedMessage);
-                            AppendToTextBox($"Packet send: {json.Packet}");
+                            HandlePacketSend(JsonConvert.DeserializeObject<SendPacketJson>(splitedMessage));
                         }
                         break;
 
                     case ObjectType.packet_recv:
                         {
-                            var json = JsonConvert.DeserializeObject<RecvPacketJson>(splitedMessage);
-                            AppendToTextBox($"Packet recv: {json.Packet}");
-
-                            if (json.Packet.StartsWith("e_info"))
-                            {
-                                _botConfiguration.LatestEinfoReceived = json;
-                            }
+                            HandlePacketReceived(JsonConvert.DeserializeObject<RecvPacketJson>(splitedMessage));
                         }
                         break;
 
                     case ObjectType.query_player_info:
                         {
-                            var json = JsonConvert.DeserializeObject<QueryPlayerInfoJson>(splitedMessage);
-                            _botConfiguration.Player = json.Player;
+                            HandleQueryPlayer(JsonConvert.DeserializeObject<QueryPlayerInfoJson>(splitedMessage));
                         }
                         break;
 
                     case ObjectType.query_inventory:
                         {
-                            var json = JsonConvert.DeserializeObject<QueryPlayerInventoryJson>(splitedMessage);
-                            _botConfiguration.Inventory = json.Inventory;
-
-                            // Pet bead
-                            var bead = _botConfiguration.Inventory.Equip.FirstOrDefault(s => s.Vnum == 192);
-                            if (bead == null)
-                            {
-                                continue;
-                            }
-                            if (!bead.Vnum.HasValue) continue;
-
-                            var item = _itemManager.Items[bead.Vnum.Value];
-                            var bazaarInfo = bead.GetBazaarInfoItem(Client, _botConfiguration, _itemManager);
-                            AppendToTextBox($"name: {item.Name} price: {item.Price}");
-                            AppendToTextBox($"Bazaar category: {bazaarInfo.category} subcategory: {bazaarInfo.subCategory}");
+                            HandleQueryInventory(JsonConvert.DeserializeObject<QueryPlayerInventoryJson>(splitedMessage));
                         }
                         break;
 
                     case ObjectType.query_skills_info:
                         {
-                            var json = JsonConvert.DeserializeObject<QueryPlayerSkillJson>(splitedMessage);
-                            _botConfiguration.Skills = json.Skills;
+                            HandleQuerySkill(JsonConvert.DeserializeObject<QueryPlayerSkillJson>(splitedMessage));
                         }
                         break;
 
                     case ObjectType.query_map_entities:
                         {
-                            var json = JsonConvert.DeserializeObject<QueryMapEntityJson>(splitedMessage);
+                            HandleQueryMapEntity(JsonConvert.DeserializeObject<QueryMapEntityJson>(splitedMessage));
                         }
                         break;
-
                 }
-                // Json parse nieunieu
             }
 
+        }
+
+        private void HandleQueryMapEntity(QueryMapEntityJson? json)
+        {
+            if (json == null)
+            {
+                return;
+            }
+        }
+
+        private void HandleQuerySkill(QueryPlayerSkillJson? json)
+        {
+            if (json == null)
+            {
+                return;
+            }
+            _botConfiguration.Skills = json.Skills;
+        }
+        private void HandleQueryInventory(QueryPlayerInventoryJson? json)
+        {
+            if (json == null)
+            {
+                return;
+            }
+
+            _botConfiguration.Inventory = json.Inventory;
+
+            // exemple c_reg parsing packet
+            // Pet bead
+            var bead = _botConfiguration.Inventory.Equip.FirstOrDefault(s => s.Vnum == 192);
+            if (bead == null)
+            {
+                return;
+            }
+            if (!bead.Vnum.HasValue) return;
+
+            var item = _itemManager.Items[bead.Vnum.Value];
+            var bazaarInfo = bead.GetBazaarInfoItem(Client, _botConfiguration, _itemManager);
+            AppendToTextBox($"name: {item.Name} price: {item.Price}");
+            AppendToTextBox($"Bazaar category: {bazaarInfo.category} subcategory: {bazaarInfo.subCategory}");
+        }
+
+        private void HandleQueryPlayer(QueryPlayerInfoJson? json)
+        {
+            if (json == null)
+            {
+                return;
+            }
+            _botConfiguration.Player = json.Player;
+        }
+
+        private void HandlePacketSend(SendPacketJson? json)
+        {
+            if (json == null)
+            {
+                return;
+            }
+            AppendToTextBox($"Packet send: {json.Packet}");
+        }
+
+        private void HandlePacketReceived(RecvPacketJson? json)
+        {
+            if (json == null)
+            {
+                return;
+            }
+            AppendToTextBox($"Packet recv: {json.Packet}");
+
+            string[] splittedPacket = json.Packet.Split(" ");
+
+            switch (splittedPacket[0]) // header
+            {
+                case "e_info":
+                    _botConfiguration.LatestEinfoReceived = json;
+                    break;
+            }
         }
 
         private void Events_Disconnected(object? sender, ConnectionEventArgs e)

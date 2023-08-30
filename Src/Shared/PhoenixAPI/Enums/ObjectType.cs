@@ -22,6 +22,6 @@
         query_inventory,    // 17
         query_skills_info,  // 18
         query_map_entities, // 19
-        target_entity       //20
+        target_entity       // 20
     }
 }
