@@ -100,7 +100,7 @@ namespace Bot
                     case ObjectType.query_skills_info:
                         {
                             var json = JsonConvert.DeserializeObject<QueryPlayerSkillJson>(splitedMessage);
-                            _botConfiguration.Skills.AddRange(json.Skills);
+                            _botConfiguration.Skills = json.Skills;
                         }
                         break;
 

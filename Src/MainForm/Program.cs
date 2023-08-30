@@ -34,6 +34,7 @@ namespace MainForm
         }
 
         public static IServiceProvider ServiceProvider { get; private set; }
+
         static IHostBuilder CreateHostBuilder()
         {
             return Host.CreateDefaultBuilder()
