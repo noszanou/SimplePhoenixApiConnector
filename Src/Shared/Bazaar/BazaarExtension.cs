@@ -13,7 +13,9 @@ namespace Shared.Bazaar
     {
         public static (byte category, byte subCategory) GetBazaarInfoItem(this Item itemjs, SimpleTcpClient xd, IBotConfiguration _conf, IItemManager manager)
         {
-            var item = manager.Items[itemjs.Vnum];
+            if (!itemjs.Vnum.HasValue) return (0,0);
+
+            var item = manager.Items[itemjs.Vnum.Value];
             // Missing item parsed ( probably i will add it or no ? c: )
             // ( Parsed with e_info )
             // Specialist
@@ -68,12 +70,12 @@ namespace Shared.Bazaar
                             {
                                 if (_conf.LatestEinfoReceived == null)
                                 {
-                                    xd.SendToTcpClient(new SendPacketJson($"eqinfo 1 {itemjs.Position}"));
+                                    xd.SendPacketToServer($"eqinfo 1 {itemjs.Position}");
                                 }
                                 
                                 while(!_conf.LatestEinfoReceived.Packet.Contains(item.Id.ToString()))
                                 {
-                                    xd.SendToTcpClient(new SendPacketJson($"eqinfo 1 {itemjs.Position}"));
+                                    xd.SendPacketToServer($"eqinfo 1 {itemjs.Position}");
                                 }
                                 var hodlingVnum = _conf.LatestEinfoReceived.Packet.Split(' ')[3];
                                 if (hodlingVnum == "0")

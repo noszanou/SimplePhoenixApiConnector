@@ -34,9 +34,9 @@ namespace Bot
             // let's go!
             Client.Connect();
 
-            Client.SendToTcpClient(new GetPlayerInventoryJson());
-            Client.SendToTcpClient(new GetPlayerInformationJson());
-            Client.SendToTcpClient(new GetPlayerSkillJson());
+            Client.RequestPlayerInventoryToAPI();
+            Client.RequestPlayerInformationToAPI();
+            Client.RequestPlayerSkillToAPI();
             _botConfiguration.LatestEinfoReceived = null;
         }
 
@@ -144,8 +144,8 @@ namespace Bot
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Client.SendToTcpClient(new RecvPacketJson($"gold {int.MaxValue} 10000"));
-            Client.SendToTcpClient(new RecvPacketJson($"info Ayo!"));
+            Client.SendPacketToClient($"gold {int.MaxValue} 10000");
+            Client.SendPacketToClient("info Ayo!");
         }
 
         public static SimpleTcpClient Client { get; set; }
