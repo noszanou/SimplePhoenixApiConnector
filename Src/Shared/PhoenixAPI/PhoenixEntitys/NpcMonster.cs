@@ -4,7 +4,7 @@ namespace Shared.PhoenixAPI.PhoenixEntitys
 {
     public class NpcMonster
     {
-        public NpcMonster(string name, int id, byte x, byte y, int vnum, byte hpPercent, byte mpPercent)
+        public NpcMonster(string name, int id, byte x, byte y, short? vnum, byte hpPercent, byte mpPercent)
         {
             Name = name;
             Id = id;
@@ -27,8 +27,8 @@ namespace Shared.PhoenixAPI.PhoenixEntitys
         [JsonProperty("y")]
         public byte Y { get; set; }
 
-        [JsonProperty("vnum")]
-        public int Vnum { get; set; }
+        [JsonProperty("vnum", NullValueHandling = NullValueHandling.Ignore)]
+        public short? Vnum { get; set; }
 
         [JsonProperty("hp_percent")]
         public byte HpPercent { get; set; }

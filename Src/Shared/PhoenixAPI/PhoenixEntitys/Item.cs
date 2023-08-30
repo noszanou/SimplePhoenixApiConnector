@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using Newtonsoft.Json;
 
 namespace Shared.PhoenixAPI.PhoenixEntitys
 {
@@ -26,8 +25,8 @@ namespace Shared.PhoenixAPI.PhoenixEntitys
         [JsonProperty("position", NullValueHandling = NullValueHandling.Ignore)]
         public byte? Position { get; set; }
 
-        [JsonProperty("vnum")]
-        public short Vnum { get; set; }
+        [JsonProperty("vnum", NullValueHandling = NullValueHandling.Ignore)]
+        public short? Vnum { get; set; }
 
         [JsonProperty("x", NullValueHandling = NullValueHandling.Ignore)]
         public byte? X { get; set; }

@@ -44,14 +44,16 @@ namespace Bot
 
             foreach (var splitedMessage in stringObject.Split("\u0001")) 
             {
-                var jsonAsDynamic = JsonConvert.DeserializeObject<dynamic>(splitedMessage);
+                Console.WriteLine(splitedMessage.ToString());
 
-                if (jsonAsDynamic?.type == null)
+                var defaultJson = JsonConvert.DeserializeObject<DefaultJson>(splitedMessage);
+
+                if (defaultJson == null)
                 {
-                    return;
+                    continue;
                 }
 
-                switch ((ObjectType)jsonAsDynamic.type)
+                switch ((ObjectType)defaultJson.Type)
                 {
                     case ObjectType.packet_send:
                         {
@@ -90,7 +92,9 @@ namespace Bot
                             {
                                 continue;
                             }
-                            var item = _itemManager.Items[bead.Vnum];
+                            if (!bead.Vnum.HasValue) continue;
+
+                            var item = _itemManager.Items[bead.Vnum.Value];
                             var bazaarInfo = bead.GetBazaarInfoItem(Client, _botConfiguration, _itemManager);
                             AppendToTextBox($"name: {item.Name} price: {item.Price}");
                             AppendToTextBox($"Bazaar category: {bazaarInfo.category} subcategory: {bazaarInfo.subCategory}");
