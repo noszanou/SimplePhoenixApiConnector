@@ -4,7 +4,7 @@ namespace Shared.PhoenixAPI.PhoenixEntitys
 {
     public class Item
     {
-        public Item(short quantity, string name, byte? position, short vnum, byte? x, byte? y, int? ownerId, int? id)
+        public Item(short quantity, string name, byte? position, short? vnum, byte? x, byte? y, int? ownerId, int? id)
         {
             Quantity = quantity;
             Name = name;
