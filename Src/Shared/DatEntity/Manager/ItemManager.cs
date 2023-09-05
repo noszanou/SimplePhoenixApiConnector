@@ -194,6 +194,7 @@ namespace Shared.DatEntity.Manager
                     switch (item.EquipmentSlot)
                     {
                         case EquipmentType.Amulet:
+                        case EquipmentType.MiniPet:
                             item.LevelMinimum = Convert.ToByte(currentLine[2]);
                             item.ItemLeftType = Convert.ToInt16(currentLine[4]);
                             if (item.ItemLeftType == 100)

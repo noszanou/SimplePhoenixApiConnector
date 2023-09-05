@@ -18,6 +18,7 @@
         CostumeSuit = 13,
         CostumeHat = 14,
         WeaponSkin = 15,
-        WingsSkin = 16
+        WingsSkin = 16,
+        MiniPet = 17
     }
 }
