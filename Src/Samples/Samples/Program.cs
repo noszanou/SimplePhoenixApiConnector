@@ -8,6 +8,8 @@ namespace Samples
     {
         private static List<ClientList> ClientList = new List<ClientList>();
 
+        private static Random DaddyCepik = new Random();
+
         static void Main(string[] args)
         {
             new Program().MainAsync().ConfigureAwait(false).GetAwaiter().GetResult();
@@ -68,6 +70,11 @@ namespace Samples
         {
             foreach (ClientList client in ClientList)
             {
+                // OMEGALOL MDMDMDMDDDRRRRRRRRRR
+                var cepik = DaddyCepik.Next(500, 2001);
+
+                Thread.Sleep(cepik);
+
                 SendSlToServer(client);
             }
         }
