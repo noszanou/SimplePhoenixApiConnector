@@ -24,6 +24,11 @@ namespace Samples
                 string line = Console.ReadLine().ToLower();
                 switch (line)
                 {
+                    case "1": // cepik option
+                        SendToAllClient();
+                        Environment.Exit(0);
+                        break;
+
                     case "all":
                         SendToAllClient();
                         break;
@@ -31,6 +36,7 @@ namespace Samples
                     case "refresh":
                         RefreshClientList();
                         break;
+
                     default:
                         DesiredClient(line);
                         break;
@@ -40,7 +46,7 @@ namespace Samples
 
         private static void FirstOutput()
         {
-            Console.WriteLine("write in the console all/refresh or characterName to wear sp ^_^");
+            Console.WriteLine("write in the console 1/all/refresh or characterName to wear sp ^_^");
         }
 
         private static void SendSlToServer(ClientList client)
